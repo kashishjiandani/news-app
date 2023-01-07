@@ -1,25 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import Navbar from './components/Navbar';
+import HomePage from './pages/HomePage';
+import Filters from './components/Filters'
+import { useState } from 'react';
 
 function App() {
+  const [mode, setMode] = useState('light');
+
+  const toggleMode=()=>{
+    if(mode==='dark'){
+      setMode('light');
+    }
+    else{
+      setMode('dark');
+    }
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar mode={mode} toggleMode={toggleMode}/>
+      <div className='mx-0 d-flex'>
+        <Filters mode={mode} toggleMode={toggleMode}/>
+      </div>
+      <HomePage />
+    </>
   );
 }
 
 export default App;
+
+// https://newsapi.org/v2/everything?q=food&apiKey=9a3f6d5c0311455386c35e778604b558
